@@ -14,14 +14,14 @@ const connection = mysql.createPool({
 // Starting our app.
 const app = express();
 
-// Creating a GET route that returns data from the 'users' table.
+// Creating a GET route that returns data from the 'beers' table.
 // GET USER
-app.get('/users', function (req, res) {
+app.get('/beers', function (req, res) {
 
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
-    // Executing the MySQL query (select all data from the 'users' table).
-    connection.query('SELECT * FROM users', function (error, results, fields) {
+    // Executing the MySQL query (select all data from the 'beers' table).
+    connection.query('SELECT * FROM beers', function (error, results, fields) {
       // If some error occurs, we throw an error.
       if (error) throw error;
       // Getting the 'response' from the database and sending it to our route. This is were the data is.
@@ -29,16 +29,16 @@ app.get('/users', function (req, res) {
     });
   });
 });
-
+ 
 // POST USER
 app.use(express.json());
-app.post('/users', (req, res) => {
+app.post('/beers', (req, res) => {
 
   req.body;
   console.log('body is ', req.body);
 
   const name = req.body.name;
-  var sql = `INSERT INTO users ( name ) VALUES ( ? )`;
+  var sql = `INSERT INTO beers ( name ) VALUES ( ? )`;
 
   connection.getConnection(function (err, connection) {
     connection.query(sql, [name], function (err, data) {
@@ -53,5 +53,5 @@ app.post('/users', (req, res) => {
 
 // Starting our server.
 app.listen(3000, () => {
- console.log('Go to http://localhost:3000/users so you can see the data.');
+ console.log('Go to http://localhost:3000/beers so you can see the data.');
 });

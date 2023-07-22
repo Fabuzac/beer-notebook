@@ -28,7 +28,7 @@ function AddBeerScreen(props) {
     }
 
     const baseURL = "http://192.168.1.50:3000";
-    axios.post(`${baseURL}/users`, beerData)
+    axios.post(`${baseURL}/beers`, beerData)
 
     .then(response => {    
       console.log(response.status, response.data)
