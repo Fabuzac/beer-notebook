@@ -10,6 +10,8 @@ npm-debug.*
 *.orig.*
 web-build/
 note.txt
+note-dev.js
+database/database.js
 assets/
 # macOS
 .DS_Store
