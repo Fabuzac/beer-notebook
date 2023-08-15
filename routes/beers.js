@@ -1,57 +1,80 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
+const router = express.Router();
+const db = require('../database/database.js'); // Importez la connexion à la base de données depuis un fichier séparé
 
-const connection = mysql.createPool({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'beernotebook'
-});
-
-// Express is a NodeJs framwork
-
-// Starting our app.
-const app = express();
-
-// Creating a GET route that returns data from the 'beers' table.
-// GET USER
-app.get('/beers', function (req, res) {
-
-    // Connecting to the database.
-    connection.getConnection(function (err, connection) {
-    // Executing the MySQL query (select all data from the 'beers' table).
-    connection.query('SELECT * FROM beers', function (error, results, fields) {
-      // If some error occurs, we throw an error.
-      if (error) throw error;
-      // Getting the 'response' from the database and sending it to our route. This is were the data is.
-      res.send(results)
-    });
+// GET
+router.get('/', (req, res) => {
+  // Récupérer toutes les bières de la base de données
+  db.query('SELECT * FROM beers', (err, results) => {
+    if (err) {
+      console.error('Erreur lors de la récupération des bières:', err);
+      res.status(500).json({ error: 'Erreur lors de la récupération des bières' });
+    } else {
+      res.json(results);
+    }
   });
 });
- 
-// POST USER
-app.use(express.json());
-app.post('/beers', (req, res) => {
 
-  req.body;
-  console.log('body is ', req.body);
+// POST
+router.post('/', (req, res) => {
+  const newBeer = req.body;
 
-  const name = req.body.name;
-  var sql = `INSERT INTO beers ( name ) VALUES ( ? )`;
+  if (!newBeer.name || !newBeer.type || !newBeer.abv) {
+    return res.status(400).json({ error: 'Les champs name, type et abv sont requis.' });
+  }
 
-  connection.getConnection(function (err, connection) {
-    connection.query(sql, [name], function (err, data) {
+  // Vérifier si la bière existe déjà
+  db.query('SELECT * FROM beers WHERE name = ?', [newBeer.name], (err, results) => {
+    if (err) {
+      console.error('Erreur lors de la recherche de la bière:', err);
+      res.status(500).json({ error: 'Erreur lors de la recherche de la bière' });
+    } else {
+      if (results.length > 0) {
+        const existingBeer = results[0];
+        return res.status(409).json({ message: 'Une bière avec ce nom existe déjà.', beer: existingBeer });
+      }
+
+      // Insérer la nouvelle bière dans la base de données
+      db.query('INSERT INTO beers SET ?', newBeer, (err, result) => {
         if (err) {
-            console.log('failed to store data')
+          console.error('Erreur lors de l\'insertion de la bière:', err);
+          res.status(500).json({ error: 'Erreur lors de l\'insertion de la bière' });
         } else {
-            console.log('successfully inserted into db')
+          newBeer.id = result.insertId;
+          res.status(201).json({ message: 'Nouvelle bière ajoutée avec succès', beer: newBeer });
         }
-    });
-  })
-})
-
-// Starting our server.
-app.listen(3000, () => {
- console.log('Go to http://localhost:3000/beers so you can see the data.');
+      });
+    }
+  });
 });
+
+// PUT
+router.put('/:id', (req, res) => {
+  const beerId = req.params.id;
+  const updatedBeer = req.body;
+
+  db.query('UPDATE beers SET ? WHERE id = ?', [updatedBeer, beerId], (err, result) => {
+    if (err) {
+      console.error('Erreur lors de la mise à jour de la bière:', err);
+      res.status(500).json({ error: 'Erreur lors de la mise à jour de la bière' });
+    } else {
+      res.json({ message: 'Bière mise à jour avec succès', beerId });
+    }
+  });
+});
+
+// DELETE
+router.delete('/:id', (req, res) => {
+  const beerId = req.params.id;
+
+  db.query('DELETE FROM beers WHERE id = ?', beerId, (err, result) => {
+    if (err) {
+      console.error('Erreur lors de la suppression de la bière:', err);
+      res.status(500).json({ error: 'Erreur lors de la suppression de la bière' });
+    } else {
+      res.json({ message: 'Bière supprimée avec succès', beerId });
+    }
+  });
+});
+
+module.exports = router;
