@@ -12,6 +12,7 @@ web-build/
 note.txt
 note-dev.js
 database/database.js
+utils/utils.js
 assets/
 # macOS
 .DS_Store

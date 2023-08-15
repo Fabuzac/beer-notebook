@@ -27,8 +27,7 @@ function AddBeerScreen(props) {
       'name' : newBeer
     }
 
-    const baseURL = "http://192.168.1.50:3000";
-    axios.post(`${baseURL}/beers`, beerData)
+    axios.post(`${localhost}/beers`, beerData)
 
     .then(response => {    
       console.log(response.status, response.data)
@@ -69,8 +68,6 @@ function AddBeerScreen(props) {
 
           {/* Added permissions */}
           {/* <uses-permission android:name="android.permission.CAMERA" /> */}
-
-
 
           {/* { 
             newBeer.map((beer) => {

@@ -11,11 +11,11 @@ function BeerListScreen({ navigation }) {
   // TODO: find a way to refresh data when switch to tab
   // API Fetch data
   const fetchData = () => {
-    const baseURL = "http://192.168.1.50:3000";
-    axios.get(`${baseURL}/beers`)
+    
+    axios.get(`${localhost}/beers`)
 
     .then(response => {
-      console.log('Render the list of the beers, Status 200')   
+      console.log('Render the list of the beers, Status 200 ✅')   
       setData(response.data) 
     })       
 
