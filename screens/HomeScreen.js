@@ -32,7 +32,7 @@ function Home({ navigation }) {
               <PrimaryButton onPress={() => navigation.navigate("BeerListScreen")}>         
               </PrimaryButton>
 
-              <SecondaryButton onPress={() => navigation.navigate("IsoScreen")}>         
+              <SecondaryButton onPress={() => navigation.navigate("CameraScreen")}>         
               </SecondaryButton>  
             </View>
           {/* COL 2 */}

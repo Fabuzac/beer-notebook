@@ -1,41 +1,8 @@
 import { Text, View, StyleSheet, Pressable, Modal, Image, TextInput, Button } from 'react-native' ;
 import {useState, useContext, useEffect} from 'react';
 import axios from "axios"
-import BarcodeScannerButton from '../components/BarcodeScannerButton';
-import { BarCodeScanner } from 'expo-barcode-scanner';
 
 function AddBeerScreen(props) {
-
-  const [newBeer, setNewBeer] = useState('');
-  
-  function camera() {
-    console.log("Camera pressed");   
-  }
-
-  function goalInputHandler(enteredText) {
-    setNewBeer(enteredText);
-  }
-
-  function addGoalHandler() {
-    console.log('Pressed');
-    fetchData();
-  }
-
-  const fetchData = () => {
-    
-    const beerData = {
-      'name' : newBeer
-    }
-
-    axios.post(`${localhost}/beers`, beerData)
-
-    .then(response => {    
-      console.log(response.status, response.data)
-    })       
-    .catch(error => {
-      console.log(error.response)
-    })
-  }
 
   return (
     <View style={styles.container}>
@@ -49,13 +16,11 @@ function AddBeerScreen(props) {
             />
             <TextInput 
               style={styles.textInput} 
-              placeholder='Register a new beer' 
-              onChangeText={goalInputHandler}
-              value={newBeer}
+              placeholder='Register a new beer'
             />
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
-                <Button title='addGoal' onPress={addGoalHandler} color="#b180f0" />
+                <Button title='addGoal' color="#b180f0" />
               </View>
               <View style={styles.button}>
                 <Button title='Cancel' onPress={props.onCancel} color="#f31282" />
@@ -63,21 +28,6 @@ function AddBeerScreen(props) {
             </View>
           </View>
 
-          <BarcodeScannerButton onPress={() => navigation.navigate("CameraScreen")}>         
-          </BarcodeScannerButton>
-
-          {/* Added permissions */}
-          {/* <uses-permission android:name="android.permission.CAMERA" /> */}
-
-          {/* { 
-            newBeer.map((beer) => {
-              return (
-                <View>
-                  <Text style={styles.item}>{beer}</Text>
-                </View>
-              );
-            })
-          } */}
       </View>
     </View>
   );
