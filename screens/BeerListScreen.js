@@ -1,12 +1,19 @@
-import { Text, View, StyleSheet, Button, Pressable, FlatList, SafeAreaView  } from 'react-native' ;
+import { Text, View, StyleSheet, Button, Pressable, FlatList, SafeAreaView, ActivityIndicator, RefreshControl  } from 'react-native' ;
 import React, { useState, useEffect } from "react";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AddBeerButton from '../components/AddBeerButton';
 import { ScrollView } from 'react-native-gesture-handler';
 import axios from "axios"
+import dump from '../utils/utils';
 
 function BeerListScreen({ navigation }) {
   const [data, setData] = useState([]);
+  const [refreshing, setRefreshing] = useState([true]);
+
+  useEffect(() => {
+    fetchData();
+
+  }, []);
 
   // TODO: find a way to refresh data when switch to tab
   // API Fetch data
@@ -23,9 +30,19 @@ function BeerListScreen({ navigation }) {
       console.log(error.response)
     })
   }
-   useEffect(() => {
-    fetchData();
-  }, []);
+   
+
+  const loadUserData = () => {
+    axios.get(`${localhost}/beers`)
+      .then(response => {
+        setRefreshing(false);     
+        setData(response.data);
+        console.log('Page refreshed ! ➰');
+      })   
+      .catch(error => {
+        console.log(error.response);
+      })
+  };
 
   // Front
   return (
@@ -34,12 +51,19 @@ function BeerListScreen({ navigation }) {
         <Text style={styles.title}>Beer Screen List</Text>
         
         <SafeAreaView style={styles.containerAreaView}>
+          {refreshing ? <ActivityIndicator /> : null}
           <FlatList 
             data={data}
-            renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
+            renderItem={({ item }) => <Text style={styles.item}>{item.brand}</Text>}
             keyExtractor={(item) => item.id}
+            enableEmptySections={true}
+            refreshControl={
+              <RefreshControl refreshing={false} onRefresh={loadUserData} />
+            }
+            
           />
         </SafeAreaView>
+
       </View>
 
       {/*
