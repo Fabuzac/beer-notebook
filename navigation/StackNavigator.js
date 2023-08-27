@@ -7,9 +7,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
 import BeerListScreen from "../screens/BeerListScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import IsoScreen from "../screens/IsoScreen";
-import AddBeerScreen from "../screens/AddBeerScreen";
 import CameraScreen from "../screens/CameraScreen";
+import AddBeerScreen from "../screens/AddBeerScreen";
+import ScannedScreen from "../screens/ScannedScreen";
 
 const Stack = createStackNavigator();
 
@@ -19,28 +19,27 @@ function HomeStack() {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="BeerListScreen" component={BeerListScreen} />
-      <Stack.Screen name="IsoScreen" component={IsoScreen} />
+      <Stack.Screen name="CameraScreen" component={CameraScreen} />
 
       <Stack.Screen name="AddBeerScreen" component={AddBeerScreen} />
-      <Stack.Screen name="CameraScreen" component={CameraScreen} />
+      <Stack.Screen name="ScannedScreen" component={ScannedScreen} />
     </Stack.Navigator>
   );
 };
 
-// ProfileStack fait reference a Profile.js et heberge un lien vers IsoScreen.js
+// ProfileStack fait reference a Profile.js et heberge un lien vers CameraScreen.js
 function ProfileStack() {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-      <Stack.Screen name="IsoScreen" component={IsoScreen} />
-      
-      <Stack.Screen name="AddBeerScreen" component={AddBeerScreen} />
       <Stack.Screen name="CameraScreen" component={CameraScreen} />
+  
+      <Stack.Screen name="AddBeerScreen" component={AddBeerScreen} />    
     </Stack.Navigator>
   );
 };
 
-// ProfileStack fait reference a Profile.js et heberge un lien vers IsoScreen.js
+// ProfileStack fait reference a Profile.js et heberge un lien vers CameraScreen.js
 function BeerListStack() {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
