@@ -9,11 +9,11 @@ app.use(bodyParser.json());
 
 const db = require('../database/database'); // Importez la connexion à la base de données depuis un fichier séparé
 
-const beersRoutes = require('./beers.js');
-const productNumberRoutes = require('./product-id.js');
+const beersRoutesController = require('./beers.js');
+const productNumberRoutesController = require('./product-id.js');
 
-app.use('/beers', beersRoutes);
-app.use('/productId', productNumberRoutes);
+app.use('/beers', beersRoutesController);
+app.use('/productId', productNumberRoutesController);
 
 app.listen(port, () => {
   console.log(`Serveur en cours d'exécution sur le port ${port}`);
