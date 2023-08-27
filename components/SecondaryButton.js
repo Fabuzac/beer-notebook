@@ -13,7 +13,7 @@ function SecondaryButton({ onPress }) {
         onPress={ onPress } 
         android_ripple={ {color: '#ffffff' }}        
       >
-        <Text style={styles.buttonText}>Go to IsoScreen</Text>
+        <Text style={styles.buttonText}>Go to Camera Screen</Text>
       </Pressable>
     </View>
   );
