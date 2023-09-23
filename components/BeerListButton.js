@@ -1,6 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
-function SecondaryButton({ onPress }) {
+function BeerListButton({ onPress, text }) {
 
   return (
     <View style={styles.buttonOuterContainer}>
@@ -13,13 +13,13 @@ function SecondaryButton({ onPress }) {
         onPress={ onPress } 
         android_ripple={ {color: '#ffffff' }}        
       >
-        <Text style={styles.buttonText}>Go to Camera Screen</Text>
+        <Text style={styles.buttonText}>{text}</Text> 
       </Pressable>
     </View>
   );
 }
 
-export default SecondaryButton;
+export default BeerListButton;
 
 const styles = StyleSheet.create({
 
@@ -29,22 +29,23 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   buttonInnerContainer: {
-    backgroundColor: '#fbdb6c',    
+    backgroundColor: '#b1c156',    
     paddingVertical: 10,
     paddingHorizontal: 25,
     elevation: 2,
-    height: 150,
-    width: 150,
-    borderColor: '#ccc',
+    height: 50,
+    width: '100%',
+    borderColor: '#b1c156',
     borderWidth: 2,
     borderRadius: 28,
   },
   buttonText: {
-    color: '#000000',
+    color: '#ffffff',
     textAlign: 'center',
     fontWeight: 'bold',
   },
   pressed: {
     opacity: 0.75,
+    
   }
 });

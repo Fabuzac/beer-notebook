@@ -1,6 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
-function PrimaryButton({ onPress }) {
+function AddByScanButton({ onPress }) {
 
   return (
     <View style={styles.buttonOuterContainer}>
@@ -13,13 +13,13 @@ function PrimaryButton({ onPress }) {
         onPress={ onPress } 
         android_ripple={ {color: '#ffffff' }}        
       >
-        <Text style={styles.buttonText}>See more</Text>
+        <Text style={styles.buttonText}>Code-barre</Text>
       </Pressable>
     </View>
   );
 }
 
-export default PrimaryButton;
+export default AddByScanButton;
 
 const styles = StyleSheet.create({
 
@@ -29,18 +29,18 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   buttonInnerContainer: {
-    backgroundColor: '#fbdb6c',    
+    backgroundColor: '#b1c156',    
     paddingVertical: 10,
     paddingHorizontal: 25,
     elevation: 2,
-    height: 150,
-    width: 150,
-    borderColor: '#ccc',
+    height: 50,
+    width: '100%',
+    borderColor: '#b1c156',
     borderWidth: 2,
     borderRadius: 28,
   },
   buttonText: {
-    color: '#000000',
+    color: '#ffffff',
     textAlign: 'center',
     fontWeight: 'bold',
   },

@@ -1,6 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
-function AddBeerButton({ onPress }) {
+function AddByFieldsButton({ onPress }) {
 
   return (
     <View style={styles.buttonOuterContainer}>
@@ -13,13 +13,13 @@ function AddBeerButton({ onPress }) {
         onPress={ onPress } 
         android_ripple={ {color: '#ffffff' }}        
       >
-        <Text style={styles.buttonText}>Add a Beer</Text>
+        <Text style={styles.buttonText}>Ecrire</Text> 
       </Pressable>
     </View>
   );
 }
 
-export default AddBeerButton;
+export default AddByFieldsButton;
 
 const styles = StyleSheet.create({
 
@@ -29,22 +29,23 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   buttonInnerContainer: {
-    backgroundColor: '#fbdb6c',    
+    backgroundColor: '#b1c156',    
     paddingVertical: 10,
     paddingHorizontal: 25,
     elevation: 2,
-    height: 150,
-    width: 150,
-    borderColor: '#ccc',
+    height: 50,
+    width: '100%',
+    borderColor: '#b1c156',
     borderWidth: 2,
     borderRadius: 28,
   },
   buttonText: {
-    color: '#000000',
+    color: '#ffffff',
     textAlign: 'center',
     fontWeight: 'bold',
   },
   pressed: {
     opacity: 0.75,
+    
   }
 });
