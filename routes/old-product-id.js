@@ -22,6 +22,8 @@ router.get('/', (req, res) => {
 
 // GET->ONE
 router.get('/id', (req, res) => {
+  
+  console.log(req);
 
   // TODO: passer ID de maniere dynamique
   db.query('SELECT * FROM product_id WHERE id = 16', (err, results) => {
