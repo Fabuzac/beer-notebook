@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import dump from '../utils/utils';
+import { dump } from '../utils/utils'
 import axios from "axios"
-
 import { CommonActions } from '@react-navigation/native';
 
 export default function CameraScreen({ navigation }) {
@@ -35,6 +34,7 @@ export default function CameraScreen({ navigation }) {
     //       },
     //     })
     //   );
+
   }, []);
   
 
@@ -59,24 +59,34 @@ export default function CameraScreen({ navigation }) {
 
     .then(gotResponse => {    
 
+      if ( gotResponse._keywords.includes('biere') ) {
+        dump('Categorie bières reconnu');
+      }
+
       axios.post(`${localhost}/beers`, {
         'product_id' : gotResponse.id,
-        'brand' : gotResponse.brands
+        'brand' : gotResponse.brands,
+        'generic_name_fr' : gotResponse.generic_name_fr,
+        'product_name_fr' : gotResponse.product_name_fr,
+        'manufacturing_places_tags' : gotResponse.manufacturing_places_tags,
+        'quantity' : gotResponse.quantity,
+        'image_url' : gotResponse.image_url,
       })
       
       console.log('✅ Posted ! 😉')
 
-      // Step back for close camera and redirect to beer list
+      // Step back for close camera and redirect to beer confirmation
 
-      // navigation.dispatch(CommonActions.goBack());
-      // navigation.dispatch(
-      //   CommonActions.navigate({
-      //     name: 'Beer',
-      //     params: {
-      //       log: dump('The redirection worked'),
-      //     },
-      //   })
-      // );
+      navigation.dispatch(CommonActions.goBack());
+      navigation.dispatch(
+        CommonActions.navigate({
+          name: 'ScannedScreen',
+          params: {
+            log: dump('The redirection worked'),
+            product_id: gotResponse.id,
+          },
+        }),        
+      );
     })   
 
     .catch(error => {

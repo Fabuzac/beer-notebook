@@ -1,8 +1,7 @@
 import { Text, View, StyleSheet, Button, Pressable } from 'react-native' ;
 import Icon from 'react-native-vector-icons/FontAwesome';
-import PrimaryButton from '../components/PrimaryButton';
-import SecondaryButton from '../components/SecondaryButton';
-import AddBeerButton from '../components/AddBeerButton';
+import AddByScanButton from '../components/AddByScanButton';
+import AddByFieldsButton from '../components/AddByFieldsButton';
 
 // Page home de l'application
 function Home({ navigation }) {
@@ -11,13 +10,13 @@ function Home({ navigation }) {
     
     <View style={styles.container}>
 
-      <View style={styles.header}>       
+      {/* <View style={styles.header}>       
         <View style={styles.borderTitle}>
           <Text style={styles.title}>Beer Notebook</Text>
           <Icon name="beer" size={30} color="#ffffff" />
         </View>      
         
-      </View>
+      </View> */}
 
       <View style={styles.containerDashboard}>
         <View style={styles.borderDashboard}>
@@ -27,23 +26,23 @@ function Home({ navigation }) {
 
         {/* CONTAINER */}
         <View style={styles.containerColumn}>
+          <Text>Comment souhaitez vous ajouter une biere?</Text>
           {/* COL 1 */}
           <View style={styles.item1}>
-              <PrimaryButton onPress={() => navigation.navigate("BeerListScreen")}>         
-              </PrimaryButton>
+            
+            <AddByScanButton onPress={() => navigation.navigate("CameraScreen")} />         
 
-              <SecondaryButton onPress={() => navigation.navigate("CameraScreen")}>         
-              </SecondaryButton>  
             </View>
           {/* COL 2 */}
           <View style={styles.item2}>
-            <AddBeerButton onPress={() => navigation.navigate("AddBeerScreen")}>         
-            </AddBeerButton>
-          </View>
-        </View>
-      </View>
 
-  
+            <AddByFieldsButton onPress={() => navigation.navigate("AddBeerScreen")} />         
+
+          </View>
+
+          
+        </View>
+      </View>  
     </View>
   );
 };
@@ -53,7 +52,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ccc",
+    backgroundColor: "#ffffff",
   },
   header: {
     flex: 1,
@@ -66,11 +65,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     fontWeight: "normal",
-    color: "#000",
+    color: "#ffffff",
     paddingHorizontal: 20,
   },
   borderTitle: {
-    backgroundColor: "#fbdb6c",
+    backgroundColor: "#f9322c",
     flex: 1,
     flexDirection: "row",
     width: "100%",
@@ -116,8 +115,8 @@ const styles = StyleSheet.create({
   },
   containerDashboard: {
     flex: 4,
-    backgroundColor: "#ffffff",
-    margin: 9,
+    backgroundColor: "#eaeaf3",
+    margin: 15,
     borderRadius: 12,
   },
   col2: {
@@ -131,10 +130,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   borderDashboard: {
-    backgroundColor: "#fbdb6c",
+    backgroundColor: "#78a02e",
     flexDirection: "row",
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
+    marginBottom: 30
   },
   containerColumn: { 
     flex: 1,

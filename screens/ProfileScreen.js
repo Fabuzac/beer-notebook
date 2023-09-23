@@ -11,6 +11,7 @@ function ProfileScreen({ navigation }) {
             onPress={() => navigation.navigate("IsoScreen")}
           />        
         </View>
+        <Text>Autem tenetur incidunt praesentium neque qui recusandae. Dolore qui nam quo esse mollitia. Dolores laboriosam beatae in est aperiam eum maxime. Rerum aut quis delectus voluptatem non eos soluta. Dolores perspiciatis labore dignissimos harum repellat corporis vel. Impedit quia officia ut quibusdam hic atque dolor alias.</Text>
       </View>
     </View>
   );
@@ -21,7 +22,7 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ccc",
+    backgroundColor: "#eaeaf3",
   },
   header: {
     flex: 1,

@@ -20,8 +20,9 @@ function AddBeerScreen(props) {
             />
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
-                <Button title='addGoal' color="#b180f0" />
+                <Button title='Save' color="#b180f0" />
               </View>
+
               <View style={styles.button}>
                 <Button title='Cancel' onPress={props.onCancel} color="#f31282" />
               </View>
@@ -55,5 +56,8 @@ const styles = StyleSheet.create({
   },
   item: {
 
+  },
+  button: {
+    marginTop: 10,
   }
 });
