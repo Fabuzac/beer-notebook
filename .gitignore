@@ -14,5 +14,6 @@ note-dev.js
 database/database.js
 utils/utils.js
 assets/
+colors.css
 # macOS
 .DS_Store
