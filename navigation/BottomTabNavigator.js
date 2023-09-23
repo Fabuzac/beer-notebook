@@ -16,28 +16,28 @@ function BottomTabNavigator() {
         tabBarIcon: ({ color, size }) => {
           let iconName;
 
-          if (route.name === 'Home') {
+          if (route.name === 'Accueil') {
             iconName = 'ios-home-outline';
           }
 
-          if (route.name === 'Beer') {
+          if (route.name === 'Bières') {
             iconName = 'ios-beer-outline';
           }
 
-          if (route.name === 'Profile') {
+          if (route.name === 'Profil') {
             iconName = 'ios-person-outline';              
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'orange',
+        tabBarActiveTintColor: '#78a02e',
         tabBarInactiveTintColor: 'gray',
         headerShown: false,
       })}
       > 
-      <Tab.Screen name="Beer" component={BeerListStack} />
-      <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Profile" component={ProfileStack} />  
+      <Tab.Screen name="Bières" component={BeerListStack} />
+      <Tab.Screen name="Accueil" component={HomeStack} />
+      <Tab.Screen name="Profil" component={ProfileStack} />  
     </Tab.Navigator>
   );
 };

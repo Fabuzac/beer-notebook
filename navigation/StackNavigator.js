@@ -10,6 +10,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import CameraScreen from "../screens/CameraScreen";
 import AddBeerScreen from "../screens/AddBeerScreen";
 import ScannedScreen from "../screens/ScannedScreen";
+import BeerDetailScreen from "../screens/BeerDetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,7 @@ function BeerListStack() {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="BeerListScreen" component={BeerListScreen} />
       <Stack.Screen name="AddBeerScreen" component={AddBeerScreen} />
+      <Stack.Screen name="BeerDetailScreen" component={BeerDetailScreen} />
     </Stack.Navigator>
   );
 };
